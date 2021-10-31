@@ -2,6 +2,6 @@
 
 # 凡云数智内部管理系统
 
-＃ Copyright
+# License
 
 MIT License

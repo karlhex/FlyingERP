@@ -10,6 +10,16 @@ use App\Http\Resources\SOResource;
 class SOController extends Controller
 {
     /**
+     * get all records
+     *
+     *  @return void
+     */
+    public function all()
+    {
+        return SOResource::collection(SelectOption::all());
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

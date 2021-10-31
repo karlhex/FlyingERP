@@ -21,8 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/allsos', [SOController::class, 'all']);
+Route::get('/user/search', [\App\Http\Controllers\Api\UserController::class, 'search']);
+
 Route::apiResources([
  'companies' => CompanyController::class,
+ 'users' => \App\Http\Controllers\Api\UserController::class,
  'people' => PersonController::class,
  'sos' => SOController::class,
+ 'employees' =>  \App\Http\Controllers\Api\EmployeeController::class,
 ]);

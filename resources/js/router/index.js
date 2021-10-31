@@ -19,7 +19,17 @@ const routes = [
         path: '/people',
         name: 'person.index',
         component: PersonIndex
-    }
+    },
+  {
+    path: '/employees',
+    component: () => import('../views/employees/index'),
+    name: 'Employees',
+  },
+  {
+    path: '/employee/:id',
+    component: () => import('../views/employees/edit'),
+    name: 'employee.edit',
+  }
 ];
 
 const router = createRouter({

@@ -6,40 +6,12 @@
     @set="setForm"
     @clear="clearForm"
   >
-  <template v-slot:header>
-    <th class="px-6 py-3 bg-gray-50">
-      <span
-        class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase">Name</span>
-    </th>
-    <th class="px-6 py-3 bg-gray-50">
-      <span
-        class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase">Phone</span>
-    </th>
-    <th class="px-6 py-3 bg-gray-50">
-      <span
-        class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase">Email</span>
-    </th>
-    <th class="px-6 py-3 bg-gray-50">
-      <span
-        class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase">Company</span>
-    </th>
+  <template v-slot:default>
+    <el-table-column prop="name" :label="t('person.name')" width="180" />
+    <el-table-column prop="phone1" :label="t('person.phone')" width="180" />
+    <el-table-column prop="email" :label="t('person.email')" width="220" />
+    <el-table-column prop="company_name" :label="t('person.company')" width="250" />
   </template>
-
-  <template v-slot:detail="slotProps" >
-          <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-            {{ slotProps.item.name }}
-          </td>
-          <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-            {{ slotProps.item.phone1 }}
-          </td>
-          <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-            {{ slotProps.item.email }}
-          </td>
-          <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-            {{ slotProps.item.company_name }}
-          </td>
-  </template>
-
 
   <template v-slot:dialog >
     <el-form :model="form">
@@ -74,12 +46,14 @@
 
 <script>
 import EditFrame from '../../components/editframe/index.vue'
-
 import { reactive, toRefs } from 'vue'
+import { useI18n }  from 'vue-i18n'
 
 export default {
   components: { EditFrame },
 	setup() {
+
+    const { t } = useI18n()
 
     const state = reactive({
       form: {
@@ -115,6 +89,7 @@ export default {
     }
 
       return {
+        t,
         setForm,
         clearForm,
         ...toRefs(state),

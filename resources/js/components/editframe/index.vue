@@ -1,36 +1,21 @@
 <template>
-<div class="overflow-hidden overflow-x-auto min-w-full align-middle sm:rounded-md">
-  <table class="min-w-full border divide-y divide-gray-200">
-    <thead>
-      <tr>
-        <slot name="header" />
-
-        <th class="px-6 py-3 bg-gray-50">
-          <el-button type="primary" @click="handleCreate">
-            Create
-          </el-button>
-        </th>
-      </tr>
-    </thead>
-
-    <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-      <template v-for="item in records" :key="item.id">
-        <tr class="bg-white">
-
-          <slot name="detail" :item="item" />
-
-          <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-            <el-button type="primary" @click="handleEdit(item.id)">
-              Edit
-            </el-button>
-            <el-button type="danger" @click="handleDelete(item.id)">
-              Delete
-            </el-button>
-          </td>
-        </tr>
+  <el-table :data="records" style="width: 100%">
+    <slot name="default" />
+    <el-table-column fixed="right" prop="actions" label="actions" width="150">
+      <template #header>
+        <el-button type="primary" icon="el-icon-plus" @click="handleCreate" circle>
+        </el-button>
       </template>
-    </tbody>
-  </table>
+
+      <template #default="scope">
+        <el-button type="primary" icon="el-icon-edit" @click="handleEdit(scope.row.id)" circle>
+        </el-button>
+        <el-button type="danger" icon="el-icon-delete" @click="handleDelete(scope.row.id)" circle>
+        </el-button>
+      </template>
+
+    </el-table-column>
+  </el-table>
 
   <el-pagination :current-page="page" @update:current-page="updatePage" layout="prev, pager, next" :page-count="page_count"></el-pagination>
 
@@ -49,12 +34,10 @@
       </span>
     </template>
   </el-dialog>
-
-</div>
 </template>>
 
 <script>
-import { onMounted, reactive, toRefs, computed } from 'vue'
+  import { onMounted, reactive, toRefs, computed } from 'vue'
 import useRecord from '../../composables/record'
 
 export default {
@@ -72,7 +55,8 @@ export default {
       default: ''
     },
   },
-	setup(props, context) {
+  emits: ['set', 'clear'],
+	setup(props, emits) {
 
     const { errors, record, records, total, getRecord, getRecords, destroyRecord, updateRecord } = useRecord(props.model)
 
@@ -99,12 +83,12 @@ export default {
 
     const handleEdit = async (id) => {
       await getRecord(id)
-      context.emit('set', record)
+      emits.emit('set', record)
       state.dialogFormVisible = true
     }
 
     const handleCreate = async () => {
-      context.emit('clear')
+      emits.emit('clear')
       state.dialogFormVisible = true
     }
 

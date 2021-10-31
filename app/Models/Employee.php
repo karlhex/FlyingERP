@@ -3,16 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\FilterModel;
 use App\Models\work_experience;
+/*
 use App\Models\project_experience;
 use App\Models\Education;
 use App\Models\certificate;
-use App\Traits\FilesMorphs;
+*/
+use App\Models\FlyingModel;
 use App\Traits\WithSelectOption;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Employee extends FilterModel
+class Employee extends FlyingModel
 {
     use HasFactory;
     use SoftDeletes;
@@ -20,6 +21,7 @@ class Employee extends FilterModel
 
     protected $guarded = ['id'];
 
+    /*
     public function work_experience()
     {
         return $this->hasMany(work_experience::class);
@@ -44,4 +46,5 @@ class Employee extends FilterModel
     {
         return $this->getSelectOptionValue('department',$this->department);
     }
+    */
 }

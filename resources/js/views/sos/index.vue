@@ -1,4 +1,5 @@
 <template>
+<div>
   <edit-frame
     model="sos"
     :form="form"
@@ -6,33 +7,11 @@
     @set="setForm"
     @clear="clearForm"
   >
-  <template v-slot:header>
-    <th class="px-6 py-3 bg-gray-50">
-      <span
-        class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase">{{ t('sos.key') }}</span>
-    </th>
-    <th class="px-6 py-3 bg-gray-50">
-      <span
-        class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase"> {{ t('sos.option') }}</span>
-    </th>
-    <th class="px-6 py-3 bg-gray-50">
-      <span
-        class="text-xs font-medium tracking-wider leading-4 text-left text-gray-500 uppercase">{{ t('sos.value') }}</span>
-    </th>
+  <template v-slot:default>
+    <el-table-column prop="key" :label="t('sos.key')" width="180" />
+    <el-table-column prop="option" :label="t('sos.option')" width="180" />
+    <el-table-column prop="value" :label="t('sos.value')" width="180" />
   </template>
-
-  <template v-slot:detail="slotProps" >
-    <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-      {{ slotProps.item.key }}
-    </td>
-    <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-      {{ slotProps.item.option }}
-    </td>
-    <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-      {{ slotProps.item.value }}
-    </td>
-  </template>
-
 
   <template v-slot:dialog >
     <el-form :model="form">
@@ -48,6 +27,7 @@
     </el-form>
   </template>
   </edit-frame>
+</div>
 </template>>
 
 <script>
