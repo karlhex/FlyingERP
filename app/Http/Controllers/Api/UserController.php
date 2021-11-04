@@ -6,11 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use App\Traits\WithSearch;
 
 class UserController extends Controller
 {
+    use WithSearch;
+
+    public function __construct() {
+        $this->initSearch(
+            User::class,
+            ['name', 'email'],
+            UserResource::class
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -73,25 +82,4 @@ class UserController extends Controller
         return response()->noContent();
     }
 
-    /**
-     * 查找相关的用户
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $quest)
-    {
-        $searchstring = $quest->query('search','#NONE#');
-
-        if ($searchstring === '#NONE#') {
-            $users = User::all();
-        }else {
-            $users = User::where('name', 'LIKE', '%'.$searchstring.'%')
-            ->where('email', 'LIKE', '%'.$searchstring.'%')
-            ->get();
-        }
-
-        return UserResource::collection($users);
-    }
 }

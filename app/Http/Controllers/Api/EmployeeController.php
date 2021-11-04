@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Http\Requests\EmployeeRequest;
 use App\Http\Resources\EmployeeResource;
-use Illuminate\Support\Facades\Log;
+use App\Traits\WithReplaceList;
 
 class EmployeeController extends Controller
 {
+    use WithReplaceList;
+
     /**
      * Display a listing of the resource.
      *
@@ -18,6 +20,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $per_page = config('paginate.per_page');
+
         return EmployeeResource::collection(Employee::paginate($per_page));
     }
 
@@ -42,6 +45,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
+
         return new EmployeeResource($employee);
     }
 
@@ -55,6 +59,15 @@ class EmployeeController extends Controller
     public function update(EmployeeRequest $request, Employee $employee)
     {
         $employee->update($request->validated());
+
+        $work_experiences = $request->input('work_experiences');
+        $this->replaceList($employee, 'work_experiences', $work_experiences);
+        $educations = $request->input('educations');
+        $this->replaceList($employee, 'educations', $educations);
+        $project_experiences = $request->input('project_experiences');
+        $this->replaceList($employee, 'project_experiences', $project_experiences);
+        $certificates = $request->input('certificates');
+        $this->replaceList($employee, 'certificates', $certificates);
 
         return new EmployeeResource($employee);
     }

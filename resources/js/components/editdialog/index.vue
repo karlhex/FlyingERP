@@ -57,15 +57,14 @@ export default {
 
     const saveFunction = async () => {
       errors.value = ''
-      console.log('form', props.form)
       await updateRecord(props.form)
-      console.log('errors', errors)
       if ( errors.value === '' ) {
         goback()
       }
     }
 
     const handleEdit = async (id) => {
+      console.log('edit')
       await getRecord(id)
       emits.emit('set', record)
     }
@@ -77,7 +76,7 @@ export default {
     const loadRecord = () => {
       const id = route.params.id
 
-      if ( id === 0 ) {
+      if ( id === '0' ) {
         handleCreate()
       }else{
         handleEdit(id)
@@ -85,7 +84,6 @@ export default {
     }
 
     const goback = () => {
-      console.log('goback')
       router.back()
     }
 

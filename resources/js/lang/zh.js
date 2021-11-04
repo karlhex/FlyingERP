@@ -35,6 +35,33 @@ export default {
     'si_city': '社保城市',
     'si_account': '社保帐号',
     'pf_account': '公积金帐号',
-
-  }
+  },
+  we: {
+      'title': '工作经验',
+      'start_date': '开始日期',
+      'end_date': '结束日期',
+      'company': '公司名称',
+      'department': '部门名称',
+      'position': '职务',
+  },
+  pe: {
+      'title': '项目经验',
+      'start_date': '开始日期',
+      'end_date': '结束日期',
+      'project': '项目名称',
+      'role': '项目角色',
+  },
+  education: {
+      'title': '学历',
+      'start_date': '开始日期',
+      'end_date': '结束日期',
+      'school': '学校',
+      'degree': '最高学位',
+  },
+  certificate: {
+      'title': '所获证书',
+      'name': '证书名称',
+      'cer_date': '获取日期',
+      'source': '颁发机构',
+  },
 }

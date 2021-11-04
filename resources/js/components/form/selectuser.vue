@@ -44,6 +44,8 @@ export default {
     const { record, getRecord } = useRecord('users')
 
     const initOptions = async () => {
+      if (!value.value) return
+
       await getRecord(value.value)
       const o = record.value
 

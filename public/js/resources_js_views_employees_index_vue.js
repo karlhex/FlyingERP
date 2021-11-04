@@ -257,7 +257,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }();
 
     var page_count = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
-      console.log('total', total);
       return Math.floor((total.value - 1) / 5 + 1);
     });
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(updatePage(1));

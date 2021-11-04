@@ -6,7 +6,7 @@ export default function useUser() {
   const errors = ref('')
   const doSearch = async (query) => {
     try {
-      const response = await axios.get('/api/user/search', { search: query })
+      const response = await axios.get(`/api/user/search?search=${query}`)
       return response.data.data
     } catch(e) {
       ElMessage.error(e.response.data.message)

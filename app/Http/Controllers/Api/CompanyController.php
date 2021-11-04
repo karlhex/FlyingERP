@@ -6,10 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Http\Requests\CompanyRequest;
 use App\Http\Resources\CompanyResource;
-use Illuminate\Support\Facades\Log;
+use App\Traits\WithSearch;
 
 class CompanyController extends Controller
 {
+    use WithSearch;
+
+    public function __construct() {
+        $this->initSearch(
+            Company::class,
+            ['name', 'address'],
+            CompanyResource::class
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -71,4 +81,5 @@ class CompanyController extends Controller
 
         return response()->noContent();
     }
+
 }

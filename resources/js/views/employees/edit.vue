@@ -1,4 +1,5 @@
 <template>
+  <div>
   <edit-dialog
     model="employees"
     dialogTitle="Edit Employee"
@@ -94,8 +95,169 @@
           </el-form-item>
         </div>
       </el-row>
+
+      <list-box
+        v-model="form.work_experiences"
+        :dialogTitle="t('we.title')"
+        :form="weform"
+        @set="setWeForm"
+        @clear="clearWeForm"
+      >
+        <template v-slot:default>
+          <el-table-column prop="start_date" :label="t('we.start_date')" width="180">
+            <template #default="scope">
+              <date-format :value="scope.row.start_date" />
+            </template>
+          </el-table-column>
+          <el-table-column prop="end_date" :label="t('we.end_date')" width="180">
+            <template #default="scope">
+              <date-format :value="scope.row.end_date" />
+            </template>
+          </el-table-column>
+          <el-table-column prop="company" :label="t('we.company')" width="180" />
+          <el-table-column prop="department" :label="t('we.department')" width="180" />
+          <el-table-column prop="position" :label="t('we.position')" width="180" />
+        </template>
+
+        <template v-slot:dialog >
+          <el-form :model="weform">
+            <el-form-item :label="t('we.start_date')" :label-width="formLabelWidth">
+              <el-date-picker v-model="weform.start_date" type="date" placeholder="Pick a day"></el-date-picker>
+            </el-form-item>
+            <el-form-item :label="t('we.end_date')" :label-width="formLabelWidth">
+              <el-date-picker v-model="weform.end_date" type="date" placeholder="Pick a day"></el-date-picker>
+            </el-form-item>
+            <el-form-item :label="t('we.company')" :label-width="formLabelWidth">
+              <el-input v-model="weform.company" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item :label="t('we.department')" :label-width="formLabelWidth">
+              <el-input v-model="weform.department" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item :label="t('we.position')" :label-width="formLabelWidth">
+              <el-input v-model="weform.position" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+        </template>
+      </list-box>
+
+      <list-box
+        v-model="form.educations"
+        :dialogTitle="t('education.title')"
+        :form="eduform"
+        @set="setEduForm"
+        @clear="clearEduForm"
+      >
+        <template v-slot:default>
+          <el-table-column prop="start_date" :label="t('education.start_date')" width="180">
+            <template #default="scope">
+              <date-format :value="scope.row.start_date" />
+            </template>
+          </el-table-column>
+          <el-table-column prop="end_date" :label="t('education.end_date')" width="180">
+            <template #default="scope">
+              <date-format :value="scope.row.end_date" />
+            </template>
+          </el-table-column>
+          <el-table-column prop="school" :label="t('education.school')" width="180" />
+          <el-table-column prop="degree" :label="t('education.degree')" width="180">
+            <template #default="scope">
+              <degree-format :degree="scope.row.degree" />
+            </template>
+          </el-table-column>
+        </template>
+
+        <template v-slot:dialog >
+          <el-form :model="eduform">
+            <el-form-item :label="t('education.start_date')" :label-width="formLabelWidth">
+              <el-date-picker v-model="eduform.start_date" type="date" placeholder="Pick a day"></el-date-picker>
+            </el-form-item>
+            <el-form-item :label="t('education.end_date')" :label-width="formLabelWidth">
+              <el-date-picker v-model="eduform.end_date" type="date" placeholder="Pick a day"></el-date-picker>
+            </el-form-item>
+            <el-form-item :label="t('education.school')" :label-width="formLabelWidth">
+              <el-input v-model="eduform.school" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item :label="t('education.degree')" :label-width="formLabelWidth">
+              <fw-select v-model="eduform.degree" placeholder="Degree" skey="degree" />
+            </el-form-item>
+          </el-form>
+        </template>
+      </list-box>
+      <list-box
+        v-model="form.project_experiences"
+        :dialogTitle="t('pe.title')"
+        :form="peform"
+        @set="setPeForm"
+        @clear="clearPeForm"
+      >
+        <template v-slot:default>
+          <el-table-column prop="start_date" :label="t('pe.start_date')" width="180">
+            <template #default="scope">
+              <date-format :value="scope.row.start_date" />
+            </template>
+          </el-table-column>
+          <el-table-column prop="end_date" :label="t('pe.end_date')" width="180">
+            <template #default="scope">
+              <date-format :value="scope.row.end_date" />
+            </template>
+          </el-table-column>
+          <el-table-column prop="project" :label="t('pe.project')" width="180" />
+          <el-table-column prop="role" :label="t('pe.role')" width="180" />
+        </template>
+
+        <template v-slot:dialog >
+          <el-form :model="peform">
+            <el-form-item :label="t('pe.start_date')" :label-width="formLabelWidth">
+              <el-date-picker v-model="peform.start_date" type="date" placeholder="Pick a day"></el-date-picker>
+            </el-form-item>
+            <el-form-item :label="t('pe.end_date')" :label-width="formLabelWidth">
+              <el-date-picker v-model="peform.end_date" type="date" placeholder="Pick a day"></el-date-picker>
+            </el-form-item>
+            <el-form-item :label="t('pe.project')" :label-width="formLabelWidth">
+              <el-input v-model="peform.project" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item :label="t('pe.role')" :label-width="formLabelWidth">
+              <el-input v-model="peform.role" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+        </template>
+      </list-box>
+
+      <list-box
+        v-model="form.certificates"
+        :dialogTitle="t('certificate.title')"
+        :form="ceform"
+        @set="setCeForm"
+        @clear="clearCeForm"
+      >
+        <template v-slot:default>
+          <el-table-column prop="cer_name" :label="t('certificate.name')" width="180"/>
+
+          <el-table-column prop="cer_date" :label="t('certificate.cer_date')" width="180">
+            <template #default="scope">
+              <date-format :value="scope.row.cer_date" />
+            </template>
+          </el-table-column>
+          <el-table-column prop="cer_source" :label="t('certificate.source')" width="180" />
+        </template>
+
+        <template v-slot:dialog >
+          <el-form :model="ceform">
+            <el-form-item :label="t('certificate.name')" :label-width="formLabelWidth">
+              <el-input v-model="ceform.cer_name" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item :label="t('certificate.cer_date')" :label-width="formLabelWidth">
+              <el-date-picker v-model="ceform.cer_date" type="date" placeholder="Pick a day"></el-date-picker>
+            </el-form-item>
+            <el-form-item :label="t('certificate.source')" :label-width="formLabelWidth">
+              <el-input v-model="ceform.cer_source" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+        </template>
+      </list-box>
     </template>
   </edit-dialog>
+  </div>
 </template>
 
 <script>
@@ -104,13 +266,19 @@
 import FwSelect from '../../components/form/soselect.vue'
 import SelectUser from '../../components/form/selectuser.vue'
 import EditDialog from '../../components/editdialog/index.vue'
+import DateFormat from '../../components/formatters/date.vue'
+import DegreeFormat from '../../components/formatters/degree.vue'
+
+import ListBox from '../../components/listbox/index.vue'
+
 import { useI18n }  from 'vue-i18n'
 
   export default {
-    components: { EditDialog, FwSelect, SelectUser },
+    components: { EditDialog, FwSelect, SelectUser, ListBox, DateFormat, DegreeFormat },
 	setup() {
     const state = reactive({
       zform: {
+        id: 0,
         user_id: 0,
         employee_sid: '',
         fullname: '',
@@ -138,10 +306,53 @@ import { useI18n }  from 'vue-i18n'
         accunt: '',
         si_city: '',
         si_account: '',
-        pf_accouont: ''
+        pf_accouont: '',
+
+        work_experiences: [],
+        project_experiences: [],
+        educations: [],
+        certificates: [],
       },
       form: {},
       formLabelWidth: 120,
+
+      wezform: {
+        id: -1,
+        sequence: 0,
+        start_date: '20000101',
+        end_date: '20000101',
+        company: '',
+        department: '',
+        position: ''
+      },
+      weform: {},
+      pezform: {
+        id: -1,
+        sequence: 0,
+        start_date: '20000101',
+        end_date: '20000101',
+        project: '',
+        role: '',
+      },
+      peform: {},
+      eduzform: {
+        id: -1,
+        sequence: 0,
+        start_date: '20000101',
+        end_date: '20000101',
+        school: '',
+        degree: '',
+      },
+      eduform: {},
+      cezform: {
+        id: -1,
+        sequence: 0,
+        cer_name: '',
+        cer_date: '20000101',
+        cer_source: '',
+      },
+      ceform: {},
+
     })
 
     const { t } = useI18n()
@@ -152,13 +363,60 @@ import { useI18n }  from 'vue-i18n'
     }
 
     const clearForm = () => {
-      state.form = state.zform
+      state.form = { ...state.zform }
+    }
+
+    const setWeForm = (record) => {
+      clearWeForm()
+      Object.assign(state.weform, record)
+
+      console.log('record', state.weform)
+    }
+
+    const clearWeForm = () => {
+      state.weform = { ...state.wezform }
+    }
+
+    const setPeForm = (record) => {
+      clearPeForm()
+      Object.assign(state.peform, record)
+
+    }
+
+    const clearPeForm = () => {
+      state.peform = { ...state.pezform }
+    }
+
+    const setCeForm = (record) => {
+      clearCeForm()
+      Object.assign(state.ceform, record)
+    }
+
+    const clearCeForm = () => {
+      state.ceform = { ...state.cezform }
+    }
+
+    const setEduForm = (record) => {
+      clearEduForm()
+      Object.assign(state.eduform, record)
+    }
+
+    const clearEduForm = () => {
+      state.eduform = { ...state.eduzform }
     }
 
     return {
       t,
       setForm,
       clearForm,
+      setWeForm,
+      clearWeForm,
+      setPeForm,
+      clearPeForm,
+      setCeForm,
+      clearCeForm,
+      setEduForm,
+      clearEduForm,
       ...toRefs(state)
     }
 	},

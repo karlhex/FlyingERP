@@ -23,6 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/allsos', [SOController::class, 'all']);
 Route::get('/user/search', [\App\Http\Controllers\Api\UserController::class, 'search']);
+Route::get('/company/search', [\App\Http\Controllers\Api\CompanyController::class, 'search']);
+Route::get('/person/search', [\App\Http\Controllers\Api\PersonController::class, 'search']);
+Route::get('/project/search', [\App\Http\Controllers\Api\ProjectController::class, 'search']);
 
 Route::apiResources([
  'companies' => CompanyController::class,
@@ -30,4 +33,6 @@ Route::apiResources([
  'people' => PersonController::class,
  'sos' => SOController::class,
  'employees' =>  \App\Http\Controllers\Api\EmployeeController::class,
+ 'contracts' =>  \App\Http\Controllers\Api\ContractController::class,
+ 'projects' =>  \App\Http\Controllers\Api\ProjectController::class,
 ]);

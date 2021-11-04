@@ -6,9 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\Person;
 use App\Http\Requests\PersonRequest;
 use App\Http\Resources\PersonResource;
+use App\Traits\WithSearch;
 
 class PersonController extends Controller
 {
+    use WithSearch;
+
+
+    public function __construct() {
+        $this->initSearch(
+            Person::class,
+            ['name', 'phone1', 'email', 'company_name', 'department', 'position'],
+            PersonResource::class
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *

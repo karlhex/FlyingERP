@@ -40,7 +40,9 @@ class EmployeeFactory extends Factory
             'sex' => 'M',
             'department' => 'HO',
             'role' => 'manager',
-            'phone' => $this->faker->phoneNumber()
+            'phone' => $this->faker->phoneNumber(),
+
+            'email' => $this->faker->email(),
         ];
     }
 

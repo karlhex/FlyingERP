@@ -3,12 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\work_experience;
-/*
-use App\Models\project_experience;
+use App\Models\WorkExperience;
+use App\Models\ProjectExperience;
 use App\Models\Education;
-use App\Models\certificate;
-*/
+use App\Models\Certificate;
 use App\Models\FlyingModel;
 use App\Traits\WithSelectOption;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,30 +19,24 @@ class Employee extends FlyingModel
 
     protected $guarded = ['id'];
 
-    /*
-    public function work_experience()
+    public function work_experiences()
     {
-        return $this->hasMany(work_experience::class);
+        return $this->hasMany(WorkExperience::class);
     }
 
-    public function project_experience()
+    public function project_experiences()
     {
-        return $this->hasMany(project_experience::class);
+        return $this->hasMany(ProjectExperience::class);
     }
 
-    public function education()
+    public function educations()
     {
-        return $this->hasMany(education::class);
+        return $this->hasMany(Education::class);
     }
 
-    public function certificate()
+    public function certificates()
     {
-        return $this->hasMany(certificate::class);
+        return $this->hasMany(Certificate::class);
     }
 
-    public function getDepartmentNameAttribute()
-    {
-        return $this->getSelectOptionValue('department',$this->department);
-    }
-    */
 }
