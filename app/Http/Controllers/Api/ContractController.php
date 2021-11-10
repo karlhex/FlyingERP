@@ -7,10 +7,16 @@ use App\Models\Contract;
 use App\Http\Requests\ContractRequest;
 use App\Http\Resources\ContractResource;
 use App\Traits\WithReplaceList;
+use App\Traits\WithSid;
 
 class ContractController extends Controller
 {
     use WithReplaceList;
+    use WithSid;
+
+    public function __construct() {
+        $this->sidkey = 'employee';
+    }
 
     /**
      * Display a listing of the resource.
@@ -33,6 +39,8 @@ class ContractController extends Controller
     public function store(ContractRequest $request)
     {
         $contract = Contract::create($request->validated());
+
+        $this->setSid($contract->sid);
 
         return new ContractResource($contract);
     }
@@ -60,14 +68,10 @@ class ContractController extends Controller
     {
         $contract->update($request->validated());
 
-        $work_experiences = $request->input('work_experiences');
-        $this->replaceList($contract, 'work_experiences', $work_experiences);
-        $educations = $request->input('educations');
-        $this->replaceList($contract, 'educations', $educations);
-        $project_experiences = $request->input('project_experiences');
-        $this->replaceList($contract, 'project_experiences', $project_experiences);
-        $certificates = $request->input('certificates');
-        $this->replaceList($contract, 'certificates', $certificates);
+        $sops = $request->input('sops');
+        $this->replaceList($contract, 'sops', $sops);
+        $products = $request->input('products');
+        $this->replaceList($contract, 'products', $products);
 
         return new ContractResource($contract);
     }

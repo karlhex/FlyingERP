@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\FlyingModel;
 use App\Models\Company;
+use App\Models\Project;
 use App\Traits\FilesMorphs;
 
 class Contract extends FlyingModel
@@ -42,9 +43,14 @@ class Contract extends FlyingModel
         return $this->belongsTo(Company::class);
     }
 
-    public function contact_person()
+    public function contact_person_info()
     {
-        return $this->belongTo(Person::class,'contact_person');
+        return $this->belongsTo(Person::class,'contact_person');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
     }
 
     public function getCompanyNameAttribute()

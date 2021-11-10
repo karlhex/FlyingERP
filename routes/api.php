@@ -26,6 +26,9 @@ Route::get('/user/search', [\App\Http\Controllers\Api\UserController::class, 'se
 Route::get('/company/search', [\App\Http\Controllers\Api\CompanyController::class, 'search']);
 Route::get('/person/search', [\App\Http\Controllers\Api\PersonController::class, 'search']);
 Route::get('/project/search', [\App\Http\Controllers\Api\ProjectController::class, 'search']);
+Route::get('/productinfo/search', [\App\Http\Controllers\Api\ProductInfoController::class, 'search']);
+
+Route::get('/contract/sid', [\App\Http\Controllers\Api\ContractController::class, 'sid']);
 
 Route::apiResources([
  'companies' => CompanyController::class,
@@ -35,4 +38,5 @@ Route::apiResources([
  'employees' =>  \App\Http\Controllers\Api\EmployeeController::class,
  'contracts' =>  \App\Http\Controllers\Api\ContractController::class,
  'projects' =>  \App\Http\Controllers\Api\ProjectController::class,
+ 'productinfos' =>  \App\Http\Controllers\Api\ProductInfoController::class,
 ]);

@@ -28,8 +28,8 @@ class PersonFactory extends Factory
             'phone3' => $this->faker->phoneNumber(),
             'email' => $this->faker->email(),
             'company_name' => $this->faker->company(),
-            'department' => $this->faker->companySuffix(),
-            'position' => $this->faker->jobTitle(),
+            'department' => $this->faker->randomElement(['行政部', '技术部', '运维部', '工程部']),
+            'position' => $this->faker->randomElement(['开发工程师', '总经理', '经理', '副总经理', '文员', '会计']),
         ];
     }
 

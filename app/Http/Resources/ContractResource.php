@@ -18,18 +18,18 @@ class ContractResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'project' => $this->project(),
+            'project' => $this->project,
             'sid' => $this->sid,
             'peer_sid' => $this->peer_sid,
             'title' => $this->title,
-            'company' => $this->company(),
+            'company' => $this->company,
             'type' => $this->type,
             'stage' => $this->stage,
             'amount' => $this->amount,
             'sign_date' => $this->sign_date,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
-            'contract_person' => $this->contract_person(),
+            'contact_person_info' => $this->contact_person_info,
             'sops' => SopResource::collection($this->sops()->orderBy('sequence')->get()),
             'products' => ProductResource::collection($this->products()->orderBy('sequence')->get()),
         ];

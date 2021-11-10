@@ -64,7 +64,6 @@ export default {
     }
 
     const handleEdit = async (id) => {
-      console.log('edit')
       await getRecord(id)
       emits.emit('set', record)
     }

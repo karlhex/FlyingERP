@@ -9,7 +9,6 @@ const state = () => ({
 const getters = {
   getOptions: (state) => (key) => {
     const o = state.select_options.filter((o) => (o.key === key) )
-    console.log('o', o)
     return o
   },
   getOptionValue: (state) => (key, option) => {

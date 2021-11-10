@@ -14,7 +14,15 @@
             <el-input v-model="form.employee_sid" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item :label="t('employee.userid')" :label-width="formLabelWidth">
-            <select-user v-model="form.user_id" placeholder="user" ></select-user>
+            <id-select
+              v-model="form.user_id"
+              placeholder="Select user"
+              searchgroup="user"
+              querygroup="users"
+              :columns="['name', 'email']"
+              :v-model:info="form.user"
+            >
+            </id-select>
           </el-form-item>
           <el-form-item :label="t('employee.fullname')" :label-width="formLabelWidth">
             <el-input v-model="form.fullname" autocomplete="off"></el-input>
@@ -264,17 +272,17 @@
   import { reactive, toRefs, onMounted } from 'vue'
 
 import FwSelect from '../../components/form/soselect.vue'
-import SelectUser from '../../components/form/selectuser.vue'
 import EditDialog from '../../components/editdialog/index.vue'
 import DateFormat from '../../components/formatters/date.vue'
 import DegreeFormat from '../../components/formatters/degree.vue'
+import IdSelect from '../../components/form/idselect.vue'
 
 import ListBox from '../../components/listbox/index.vue'
 
 import { useI18n }  from 'vue-i18n'
 
   export default {
-    components: { EditDialog, FwSelect, SelectUser, ListBox, DateFormat, DegreeFormat },
+    components: { EditDialog, FwSelect, IdSelect, ListBox, DateFormat, DegreeFormat },
 	setup() {
     const state = reactive({
       zform: {

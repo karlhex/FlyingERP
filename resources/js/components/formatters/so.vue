@@ -1,5 +1,5 @@
 <template>
-  <span>{{ getOptionValue(key, value) }}</span>
+  <span>{{ getOptionValue(skey, value) }}</span>
 </template>
 
 <script>
@@ -8,7 +8,7 @@
 
   export default defineComponent({
   props: {
-    key: {
+    skey: {
       type: String,
       required: true,
     },

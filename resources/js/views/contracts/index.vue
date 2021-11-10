@@ -2,7 +2,7 @@
 <div>
   <list-frame
     model="contracts"
-    next="contracts.edit"
+    next="contract.edit"
   >
   <template v-slot:default>
     <el-table-column prop="title" :label="t('contract.title')" width="180" />
@@ -12,12 +12,12 @@
     <el-table-column prop="company.name" :label="t('contract.company')" width="180" />
     <el-table-column prop="type" :label="t('contract.type')" width="220">
       <template #default="scope">
-        <so-format key="contracttype" :value="scope.row.type" />
+        <so-format skey="contracttype" :value="scope.row.type" />
       </template>
     </el-table-column>
     <el-table-column prop="stage" :label="t('contract.stage')" width="220">
       <template #default="scope">
-        <so-format key="contractstage" :value="scope.row.stage" />
+        <so-format skey="contractstage" :value="scope.row.stage" />
       </template>
     </el-table-column>
     <el-table-column prop="amount" :label="t('contract.amount')" width="220">
@@ -40,7 +40,7 @@
         <date-format :value="scope.row.end_date" />
       </template>
     </el-table-column>
-    <el-table-column prop="contract_person.name" :label="t('contract.contract_person')" width="250" />
+    <el-table-column prop="contact_person_info.name" :label="t('contract.contact_person')" width="250" />
   </template>
   </list-frame>
 </div>

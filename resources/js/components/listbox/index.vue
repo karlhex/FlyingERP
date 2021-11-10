@@ -82,6 +82,7 @@ export default {
         s.push(props.form)
       }
       value.value = s
+      console.log('save', value, props.form)
       state.dialogFormVisible = false
     }
 

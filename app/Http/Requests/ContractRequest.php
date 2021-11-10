@@ -27,6 +27,7 @@ class ContractRequest extends FormRequest
     {
         return [
             'project_id' => ['required', 'numeric'],
+            'company_id' => ['required', 'numeric'],
             'sid' => ['required', 'string', Rule::unique('contracts')->ignore($this->id),],
             'peer_sid' => ['nullable', 'string'],
             'title' => ['required', 'string'],
@@ -36,7 +37,7 @@ class ContractRequest extends FormRequest
             'sign_date' => ['required', 'date'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
-            'contract_person' => ['required', 'numeric'],
+            'contact_person' => ['required', 'numeric'],
         ];
     }
 }

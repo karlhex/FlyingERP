@@ -44,7 +44,6 @@ export default {
 
         const initFunc = () => {
             state.options = getOptions(props.skey)
-            console.log('options', state.options)
         }
 
         onMounted(initFunc)

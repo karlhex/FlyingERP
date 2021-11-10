@@ -8,14 +8,12 @@ use App\Models\ProjectExperience;
 use App\Models\Education;
 use App\Models\Certificate;
 use App\Models\FlyingModel;
-use App\Traits\WithSelectOption;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends FlyingModel
 {
     use HasFactory;
     use SoftDeletes;
-    use WithSelectOption;
 
     protected $guarded = ['id'];
 

@@ -1,7 +1,7 @@
 <template>
   <div>
   <edit-dialog
-    model="Contracts"
+    model="contracts"
     dialogTitle="Edit Contract"
     :form="form"
     @set="setForm"
@@ -11,25 +11,45 @@
       <el-row type="flex" justify="space-between">
         <div :style="{width: '50%'}">
           <el-form-item :label="t('contract.sid')" :label-width="formLabelWidth">
-            <el-input v-model="form.contract_sid" autocomplete="off"></el-input>
+            <el-input v-model="form.sid" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item :label="t('contract.peer_sid')" :label-width="formLabelWidth">
             <el-input v-model="form.peer_sid" placeholder="user" ></el-input>
           </el-form-item>
           <el-form-item :label="t('contract.project')" :label-width="formLabelWidth">
-            <project-select v-model="form.project_id" placeholder="Select project" :info="form.project"> </project-select>
+            <id-select
+              v-model="form.project_id"
+              placeholder="Select project"
+              searchgroup="project"
+              querygroup="projects"
+              :columns="['sid', 'name']"
+              :v-model:info="form.project"
+              toedit="employee.edit">
+            </id-select>
           </el-form-item>
           <el-form-item :label="t('contract.company')" :label-width="formLabelWidth">
-            <company-select v-model="form.company_id" placeholder="Select company" :info="form.company"> </company-select>
+            <id-select
+              v-model="form.company_id"
+              placeholder="Select company"
+              searchgroup="company"
+              querygroup="companies"
+              :columns="['name']"
+              :v-model:info="form.company"
+              toedit="company.edit">
+            </id-select>
           </el-form-item>
           <el-form-item :label="t('contract.type')" :label-width="formLabelWidth">
-            <fw-select v-model="form.type" placeholder="Type" skey="contracttype"></fw-select>
+            <so-select v-model="form.type" placeholder="Type" skey="contracttype"></so-select>
           </el-form-item>
           <el-form-item :label="t('contract.stage')" :label-width="formLabelWidth">
-            <fw-select v-model="form.stage" placeholder="Type" skey="contractstage"></fw-select>
+            <so-select v-model="form.stage" placeholder="Type" skey="contractstage"></so-select>
           </el-form-item>
           <el-form-item :label="t('contract.amount')" :label-width="formLabelWidth">
-            <el-input v-model="form.amount" autocomplete="off"></el-input>
+            <currency-input
+              v-model="form.amount"
+              :options="{ currency: 'CNY', locale: 'zh' }"
+              autocomplete="off">
+            </currency-input>
           </el-form-item>
         </div>
         <div :style="{width: '50%'}">
@@ -46,7 +66,15 @@
             <el-date-picker v-model="form.end_date" type="date" placeholder="Pick a day"></el-date-picker>
           </el-form-item>
           <el-form-item :label="t('contract.contract_person')" :label-width="formLabelWidth">
-            <person-select v-model="form.contract_person" placeholder="Select person" :info="form.contract_person_info" ></person-select>
+            <id-select
+              v-model="form.contact_person"
+              placeholder="Select person"
+              searchgroup="person"
+              querygroup="people"
+              :columns="['name', 'company_name']"
+              :v-model:info="form.contact_person_info"
+              toedit="person.edit"
+            />
           </el-form-item>
         </div>
       </el-row>
@@ -70,8 +98,16 @@
               <date-format :value="scope.row.tran_date" />
             </template>
           </el-table-column>
-          <el-table-column prop="drcr" :label="t('sop.drcr')" width="180" />
-          <el-table-column prop="amount" :label="t('sop.amount')" width="180" />
+          <el-table-column prop="drcr" :label="t('sop.drcr')" width="180">
+            <template #default="scope">
+              <so-format skey="drcr" :value="scope.row.drcr" />
+            </template>
+          </el-table-column>
+          <el-table-column prop="amount" :label="t('sop.amount')" width="180">
+            <template #default="scope">
+              <amount-format :value="scope.row.amount" />
+            </template>
+          </el-table-column>
           <el-table-column prop="memo" :label="t('sop.memo')" width="180" />
         </template>
 
@@ -87,10 +123,14 @@
               <el-date-picker v-model="sopform.tran_date" type="date" placeholder="Pick a day"></el-date-picker>
             </el-form-item>
             <el-form-item :label="t('sop.drcr')" :label-width="formLabelWidth">
-              <fw-select v-model="sopform.drcr" placeholder="Drcr" skey="drcr"></fw-select>
+              <so-select v-model="sopform.drcr" placeholder="Drcr" skey="drcr"></so-select>
             </el-form-item>
             <el-form-item :label="t('sop.amount')" :label-width="formLabelWidth">
-              <el-input v-model="sopform.amount" autocomplete="off"></el-input>
+              <currency-input
+                v-model="sopform.amount"
+                :options="{ currency: 'CNY', locale: 'zh' }"
+                autocomplete="off">
+              </currency-input>
             </el-form-item>
             <el-form-item :label="t('sop.memo')" :label-width="formLabelWidth">
               <el-input v-model="sopform.memo" autocomplete="off"></el-input>
@@ -115,8 +155,16 @@
 
         <template v-slot:dialog >
           <el-form :model="prdform">
-            <el-form-item :label="t('product.productinfo_id')" :label-width="formLabelWidth">
-              <product-select v-model="prdform.productinfo_id" placeholder="Degree" skey="degree" :info="prdform.productinfo" />
+            <el-form-item :label="t('product.info')" :label-width="formLabelWidth">
+              <id-select
+                v-model="prdform.productinfo_id"
+                v-model:info="prdform.productinfo"
+                placeholder="Select product"
+                searchgroup="productinfo"
+                querygroup="productinfos"
+                :columns="['name', 'company_name']"
+                toedit="productinfo.edit"
+              />
             </el-form-item>
             <el-form-item :label="t('product.model')" :label-width="formLabelWidth">
               <el-input v-model="prdform.model" autocomplete="off"></el-input>
@@ -136,23 +184,22 @@
 </template>
 
 <script>
-  import { reactive, toRefs, onMounted } from 'vue'
+  import { reactive, toRefs, onMounted, watch } from 'vue'
 
-import FwSelect from '../../components/form/soselect.vue'
-import CompanySelect from '../../components/form/companyselect.vue'
-import PersonSelect from '../../components/form/personselect.vue'
-import ProjectSelect from '../../components/form/projectselect.vue'
-import ProductSelect from '../../components/form/productselect.vue'
+import SoSelect from '../../components/form/soselect.vue'
+import IdSelect from '../../components/form/idselect.vue'
 import EditDialog from '../../components/editdialog/index.vue'
 import DateFormat from '../../components/formatters/date.vue'
-import DegreeFormat from '../../components/formatters/degree.vue'
+import AmountFormat from '../../components/formatters/amount.vue'
+import SoFormat from '../../components/formatters/so.vue'
+import CurrencyInput from '../../components/form/currencyInput.vue'
 
 import ListBox from '../../components/listbox/index.vue'
 
 import { useI18n }  from 'vue-i18n'
 
-  export default {
-    components: { EditDialog, FwSelect, CompanySelect, PersonSelect, ProjectSelect, ProductSelect, ListBox, DateFormat, DegreeFormat },
+export default {
+  components: { EditDialog, SoSelect, ListBox, DateFormat, IdSelect, AmountFormat, SoFormat, CurrencyInput },
 	setup() {
     const state = reactive({
       zform: {
@@ -168,7 +215,7 @@ import { useI18n }  from 'vue-i18n'
         sign_date: '20000101',
         start_date: '20000101',
         end_date: '20000101',
-        contract_person: '',
+        contact_person: '',
 
         sops: [],
         products: [],
@@ -190,10 +237,11 @@ import { useI18n }  from 'vue-i18n'
       prdzform: {
         id: -1,
         sequence: 0,
-        start_date: '20000101',
-        end_date: '20000101',
-        project: '',
-        role: '',
+        productinfo: undefined,
+        productinfo_id: 0,
+        model: '',
+        unit_price: 0.0,
+        number: 0,
       },
       prdform: {},
     })
@@ -203,13 +251,12 @@ import { useI18n }  from 'vue-i18n'
     const setForm = (record) => {
       clearForm()
       Object.assign(state.form, record.value)
-      console.log('xxxx', record, state.form)
       state.form.project_id = record.value.project.id
       state.form.project = record.value.project
       state.form.company_id = record.value.company.id
       state.form.company = record.value.company
-      state.form.contract_person = record.value.comtract_person.id
-      state.form.contract_person_info = record.value.contract_person
+      state.form.contact_person = record.value.contact_person_info.id
+      state.form.contact_person_info = record.value.contact_person_info
     }
 
     const clearForm = () => {
@@ -219,8 +266,6 @@ import { useI18n }  from 'vue-i18n'
     const setSopForm = (record) => {
       clearSopForm()
       Object.assign(state.sopform, record)
-
-      console.log('record', state.sopform)
     }
 
     const clearSopForm = () => {
@@ -230,13 +275,17 @@ import { useI18n }  from 'vue-i18n'
     const setPrdForm = (record) => {
       clearPrdForm()
       Object.assign(state.prdform, record)
-      state.prdform.company = record.company
-
+      state.prdform.productinfo_id = record.productinfo.id
+      state.prdform.productinfo = { ...record.productinfo }
     }
 
     const clearPrdForm = () => {
       state.prdform = { ...state.prdzform }
     }
+
+    watch(state.form, (value, prevValue) => {
+      console.log('watch', value, prevValue)
+    })
 
     return {
       t,

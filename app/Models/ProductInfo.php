@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\FilterModel;
+use App\Models\FlyingModel;
 
-class ProductInfo extends FilterModel
+class ProductInfo extends FlyingModel
 {
     use HasFactory;
 
