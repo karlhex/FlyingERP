@@ -15,7 +15,7 @@ class ContractController extends Controller
     use WithSid;
 
     public function __construct() {
-        $this->sidkey = 'employee';
+        $this->sidkey = 'contract';
     }
 
     /**

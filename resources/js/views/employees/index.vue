@@ -5,7 +5,7 @@
     next="employee.edit"
   >
   <template v-slot:default>
-    <el-table-column prop="employee_sid" :label="t('employee.sid')" width="180" />
+    <el-table-column prop="employee_sid" :label="t('employee.sid')" width="220" />
     <el-table-column prop="fullname" :label="t('employee.fullname')" width="180" />
     <el-table-column prop="sex" :label="t('employee.sex')" width="220">
       <template #default="scope">

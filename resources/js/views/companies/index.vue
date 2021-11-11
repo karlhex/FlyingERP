@@ -6,9 +6,9 @@
   >
     <template v-slot:default>
       <el-table-column prop="name" :label="t('company.name')" width="180" />
-      <el-table-column prop="phone1" :label="t('company.email')" width="180" />
+      <el-table-column prop="phone" :label="t('company.phone')" width="180" />
       <el-table-column prop="address" :label="t('company.address')" width="220" />
-      <el-table-column prop="website" :label="t('company.website')" width="250" />
+      <el-table-column prop="site" :label="t('company.site')" width="250" />
     </template>
   </list-frame>
 </div>
@@ -30,8 +30,6 @@ export default {
 
     return {
       t,
-      setForm,
-      clearForm,
       ...toRefs(state),
     }
 	},

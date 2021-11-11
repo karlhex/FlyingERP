@@ -21,7 +21,8 @@ class Company extends FlyingModel
         'email',
         'business_person_id',
         'tech_person_id',
-        'account_id'
+        'account_id',
+        'tax_info_id'
     ];
 
     public function businessPerson() {

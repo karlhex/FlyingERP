@@ -19,7 +19,7 @@ class CreateProjectRolesTable extends Migration
             $table->foreignId('project_id');
             $table->unsignedTinyInteger('sequence');
             $table->string('role',20); /*['sales','PM','engineer','accuntant']*/
-            $table->foreignId('person_id');
+            $table->foreignId('employee_id');
             $table->timestamps();
             $table->softDeletes();
         });

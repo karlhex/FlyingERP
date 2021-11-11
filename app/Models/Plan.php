@@ -14,8 +14,8 @@ class Plan extends Model
 
     protected $fillable =[
         'sequence',
-        'charge_person',
-        'action_person',
+        'charge_employee_id',
+        'action_employee_id',
         'instruction',
         'start_date',
         'end_date',
@@ -26,26 +26,11 @@ class Plan extends Model
 
     public function charge_employee()
     {
-        return $this->belongsTo(Employee::class,'charge_person');
+        return $this->belongsTo(Employee::class,'charge_employee_id');
     }
 
     public function action_employee()
     {
-        return $this->belongsTo(Employee::class,'action_person');
-    }
-
-    public function getStatusNameAttribute()
-    {
-        return $this->getSelectOptionValue('planstatus',$this->status);
-    }
-
-    public function getChargePersonNameAttribute()
-    {
-        return $this->charge_employee->name;
-    }
-
-    public function getActionPersonNameAttribute()
-    {
-        return $this->action_employee->name;
+        return $this->belongsTo(Employee::class,'action_employee_id');
     }
 }

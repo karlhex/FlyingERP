@@ -8,14 +8,13 @@ import moment from 'moment'
 
   export default defineComponent({
   props: {
-    value: {
-      type: String,
-      required: true
-    }
+    value: ''
   },
 	setup(props) {
 
     const toDate = () => {
+      if (!props.value || props.value === '')  return ''
+
       return moment(props.value).format('YYYY-MM-DD')
     }
 

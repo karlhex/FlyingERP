@@ -8,23 +8,27 @@
     @clear="clearForm"
   >
     <template #default>
-    <el-form :model="form">
-      <el-form-item :label="t('product.name')" :label-width="formLabelWidth">
-        <el-input v-model="form.name" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item :label="t('product.company_name')" :label-width="formLabelWidth">
-        <el-input v-model="form.company_name" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item :label="t('product.unit')" :label-width="formLabelWidth">
-        <el-input v-model="form.unit" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item :label="t('product.type')" :label-width="formLabelWidth">
-        <so-select v-model="form.type" placeholder="Type" skey="producttype"></so-select>
-      </el-form-item>
-      <el-form-item :label="t('product.description')" :label-width="formLabelWidth">
-        <el-input v-model="form.description" autocomplete="off"></el-input>
-      </el-form-item>
-    </el-form>
+      <edit-box :dialog-title="t('project.title')">
+        <template #col1>
+          <el-form-item :label="t('product.name')" :label-width="formLabelWidth">
+            <el-input v-model="form.name" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item :label="t('product.company_name')" :label-width="formLabelWidth">
+            <el-input v-model="form.company_name" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item :label="t('product.unit')" :label-width="formLabelWidth">
+            <el-input v-model="form.unit" autocomplete="off"></el-input>
+          </el-form-item>
+        </template>
+        <template #col2>
+          <el-form-item :label="t('product.type')" :label-width="formLabelWidth">
+            <so-select v-model="form.type" placeholder="Type" skey="producttype"></so-select>
+          </el-form-item>
+          <el-form-item :label="t('product.description')" :label-width="formLabelWidth">
+            <el-input v-model="form.description" autocomplete="off"></el-input>
+          </el-form-item>
+        </template>
+      </edit-box>
     </template>
   </edit-dialog>
   </div>
@@ -34,12 +38,13 @@
   import { reactive, toRefs, onMounted } from 'vue'
 
 import EditDialog from '../../components/editdialog/index.vue'
+import EditBox from '../../components/editbox/index.vue'
 import SoSelect from '../../components/form/soselect.vue'
 
 import { useI18n }  from 'vue-i18n'
 
   export default {
-    components: { EditDialog, SoSelect },
+    components: { EditDialog, SoSelect, EditBox },
 	setup() {
     const state = reactive({
       zform: {

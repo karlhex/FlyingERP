@@ -29,7 +29,7 @@ class ProjectRequest extends FormRequest
             'name' => ['required', 'string'],
             'sid' => ['required', 'string'],
             'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date'],
+            'end_date' => ['nullable',  'date', 'after:start_date'],
             'status' => ['required', new Sos('prjstatus')],
             'memo' => ['nullable', 'string']
         ];

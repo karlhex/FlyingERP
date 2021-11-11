@@ -8,10 +8,11 @@
     @clear="clearForm"
   >
     <template #default>
-      <el-row type="flex" justify="space-between">
-        <div :style="{width: '50%'}">
+
+      <edit-box :dialog-title="t('employee.title')">
+        <template #col1>
           <el-form-item :label="t('employee.sid')" :label-width="formLabelWidth">
-            <el-input v-model="form.employee_sid" autocomplete="off"></el-input>
+            <sid-input v-model="form.employee_sid" sidkey="employee"></sid-input>
           </el-form-item>
           <el-form-item :label="t('employee.userid')" :label-width="formLabelWidth">
             <id-select
@@ -20,7 +21,7 @@
               searchgroup="user"
               querygroup="users"
               :columns="['name', 'email']"
-              :v-model:info="form.user"
+              v-model:info="form.user"
             >
             </id-select>
           </el-form-item>
@@ -60,8 +61,8 @@
           <el-form-item :label="t('employee.sign_date')" :label-width="formLabelWidth">
             <el-date-picker v-model="form.sign_date" type="date" placeholder="Pick a day"></el-date-picker>
           </el-form-item>
-        </div>
-        <div :style="{width: '50%'}">
+        </template>
+        <template #col2>
           <el-form-item :label="t('employee.sign_type')" :label-width="formLabelWidth">
             <fw-select v-model="form.sign_type" skey="signtype" ></fw-select>
           </el-form-item>
@@ -101,8 +102,8 @@
           <el-form-item :label="t('employee.pf_account')" :label-width="formLabelWidth">
             <el-input v-model="form.pf_account" autocomplete="off"></el-input>
           </el-form-item>
-        </div>
-      </el-row>
+        </template>
+      </edit-box>
 
       <list-box
         v-model="form.work_experiences"
@@ -276,13 +277,15 @@ import EditDialog from '../../components/editdialog/index.vue'
 import DateFormat from '../../components/formatters/date.vue'
 import DegreeFormat from '../../components/formatters/degree.vue'
 import IdSelect from '../../components/form/idselect.vue'
+import SidInput from '../../components/form/sidInput.vue'
+import EditBox from '../../components/editbox/index.vue'
 
 import ListBox from '../../components/listbox/index.vue'
 
 import { useI18n }  from 'vue-i18n'
 
   export default {
-    components: { EditDialog, FwSelect, IdSelect, ListBox, DateFormat, DegreeFormat },
+    components: { EditDialog, FwSelect, IdSelect, EditBox, ListBox, DateFormat, DegreeFormat, SidInput },
 	setup() {
     const state = reactive({
       zform: {

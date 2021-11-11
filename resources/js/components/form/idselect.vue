@@ -1,12 +1,13 @@
 <template>
-  <div class="flex flex-row">
-    <div>
+  <div class="flex flex-row w-full">
+    <div class="w-full">
     <el-select
        v-model="value"
       :placeholder="placeholder"
       filterable
       remote
       reserve-keyword
+      class="w-full"
       :remote-method="remoteMethod"
       :loading="loading"
       @change="onChange"
@@ -20,7 +21,7 @@
       </el-option>
     </el-select>
     </div>
-    <div v-if="toedit" class="ml-1">
+    <div v-if="toedit" class="ml-3 flex-end">
       <el-button icon="el-icon-edit" type="text" @click="handleTo" />
     </div>
   </div>
@@ -134,8 +135,8 @@ export default {
     }
 
     const onChange = (val) => {
-      console.log('onChange', val, saveRecords)
-      vinfo.value = saveRecords.find((o) => { return o.id.toString() === val.toString() })
+      const sv = saveRecords.find((o) => { return o.id.toString() === val.toString() })
+      vinfo.value = sv
     }
 
     const handleTo = () => {

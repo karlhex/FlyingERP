@@ -7,10 +7,36 @@ use App\Models\Employee;
 use App\Http\Requests\EmployeeRequest;
 use App\Http\Resources\EmployeeResource;
 use App\Traits\WithReplaceList;
+use App\Traits\WithSearch;
+use App\Traits\WithSid;
 
 class EmployeeController extends Controller
 {
     use WithReplaceList;
+    use WithSearch;
+    use WithSid;
+
+    public function __construct() {
+        $this->initSearch(
+            Employee::class,
+            ['employee_sid', 'fullname'],
+            EmployeeResource::class
+        );
+        $this->sidkey="employee";
+    }
+
+    protected function updateData(EmployeeRequest $request, $employee) {
+        $work_experiences = $request->input('work_experiences');
+        $this->replaceList($employee, 'work_experiences', $work_experiences);
+        $educations = $request->input('educations');
+        $this->replaceList($employee, 'educations', $educations);
+        $project_experiences = $request->input('project_experiences');
+        $this->replaceList($employee, 'project_experiences', $project_experiences);
+        $certificates = $request->input('certificates');
+        $this->replaceList($employee, 'certificates', $certificates);
+
+        $this->setSid($employee->employee_sid);
+    }
 
     /**
      * Display a listing of the resource.
@@ -33,6 +59,8 @@ class EmployeeController extends Controller
     public function store(EmployeeRequest $request)
     {
         $employee = Employee::create($request->validated());
+
+        $this->updateData($request, $employee);
 
         return new EmployeeResource($employee);
     }
@@ -60,14 +88,7 @@ class EmployeeController extends Controller
     {
         $employee->update($request->validated());
 
-        $work_experiences = $request->input('work_experiences');
-        $this->replaceList($employee, 'work_experiences', $work_experiences);
-        $educations = $request->input('educations');
-        $this->replaceList($employee, 'educations', $educations);
-        $project_experiences = $request->input('project_experiences');
-        $this->replaceList($employee, 'project_experiences', $project_experiences);
-        $certificates = $request->input('certificates');
-        $this->replaceList($employee, 'certificates', $certificates);
+        $this->updateData($request, $employee);
 
         return new EmployeeResource($employee);
     }

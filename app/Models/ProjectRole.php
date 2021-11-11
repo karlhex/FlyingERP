@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\fw_Contract;
-use App\Models\Person;
+use App\Models\Employee;
 
 class ProjectRole extends Model
 {
@@ -22,8 +22,8 @@ class ProjectRole extends Model
         return $this->belongsTo(fw_Contract::class);
     }
 
-    public function person()
+    public function employee()
     {
-        return $this->belongsTo(Person::class);
+        return $this->belongsTo(Employee::class);
     }
 }

@@ -18,8 +18,8 @@ class CreatePlansTable extends Migration
             $table->id();
             $table->foreignId('project_id');
             $table->unsignedTinyInteger('sequence');
-            $table->foreignId('charge_person');
-            $table->foreignId('action_person')->nullable();
+            $table->foreignId('charge_employee_id');
+            $table->foreignId('action_employee_id')->nullable();
             $table->string('instruction');
             $table->date('start_date');
             $table->date('end_date');

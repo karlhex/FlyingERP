@@ -6,7 +6,7 @@
 
     <slot />
 
-    <el-row>
+    <el-row class="m-2 p-2">
         <el-button @click="goback">Cancel</el-button>
         <el-button type="primary" @click="saveFunction">
           Confirm

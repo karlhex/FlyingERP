@@ -6,11 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Resources\ProjectResource;
+use App\Traits\WithReplaceList;
 use App\Traits\WithSearch;
+use App\Traits\WithSid;
 
 class ProjectController extends Controller
 {
     use WithSearch;
+    use WithSid;
+    use WithReplaceList;
 
     public function __construct() {
         $this->initSearch(
@@ -18,6 +22,8 @@ class ProjectController extends Controller
             ['name', 'sid'],
             ProjectResource::class
         );
+
+        $this->sidkey = 'project';
     }
 
     /**
@@ -41,6 +47,13 @@ class ProjectController extends Controller
     {
         //
         $project = Project::create($request->validated());
+
+        $roles = $request->input('roles');
+        $this->replaceList($project, 'roles', $roles);
+        $plans = $request->input('plans');
+        $this->replaceList($project, 'plans', $plans);
+
+        $this->setSid($project->sid);
 
         return new ProjectResource($project);
     }
@@ -66,6 +79,13 @@ class ProjectController extends Controller
     public function update(ProjectRequest $request, Project $project)
     {
         $project->update($request->validated());
+
+        $roles = $request->input('roles');
+        $this->replaceList($project, 'roles', $roles);
+        $plans = $request->input('plans');
+        $this->replaceList($project, 'plans', $plans);
+
+        $this->setSid($project->sid);
 
         return new ProjectResource($project);
     }

@@ -8,10 +8,13 @@
     @clear="clearForm"
   >
     <template #default>
-      <el-row type="flex" justify="space-between">
-        <div :style="{width: '50%'}">
+      <edit-box :dialog-title="t('project.title')">
+        <template #col1>
           <el-form-item :label="t('contract.sid')" :label-width="formLabelWidth">
-            <el-input v-model="form.sid" autocomplete="off"></el-input>
+            <sid-input
+              v-model="form.sid"
+              sidkey="contract"
+            />
           </el-form-item>
           <el-form-item :label="t('contract.peer_sid')" :label-width="formLabelWidth">
             <el-input v-model="form.peer_sid" placeholder="user" ></el-input>
@@ -51,8 +54,8 @@
               autocomplete="off">
             </currency-input>
           </el-form-item>
-        </div>
-        <div :style="{width: '50%'}">
+        </template>
+        <template #col2>
           <el-form-item :label="t('contract.title')" :label-width="formLabelWidth">
             <el-input v-model="form.title" autocomplete="off"></el-input>
           </el-form-item>
@@ -76,8 +79,8 @@
               toedit="person.edit"
             />
           </el-form-item>
-        </div>
-      </el-row>
+        </template>
+      </edit-box>
 
       <list-box
         v-model="form.sops"
@@ -193,13 +196,15 @@ import DateFormat from '../../components/formatters/date.vue'
 import AmountFormat from '../../components/formatters/amount.vue'
 import SoFormat from '../../components/formatters/so.vue'
 import CurrencyInput from '../../components/form/currencyInput.vue'
+import SidInput from '../../components/form/sidInput.vue'
 
 import ListBox from '../../components/listbox/index.vue'
+import EditBox from '../../components/editbox/index.vue'
 
 import { useI18n }  from 'vue-i18n'
 
 export default {
-  components: { EditDialog, SoSelect, ListBox, DateFormat, IdSelect, AmountFormat, SoFormat, CurrencyInput },
+  components: { EditDialog, SoSelect, EditBox, ListBox, DateFormat, IdSelect, AmountFormat, SoFormat, CurrencyInput, SidInput },
 	setup() {
     const state = reactive({
       zform: {

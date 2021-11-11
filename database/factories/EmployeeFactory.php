@@ -4,9 +4,12 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Employee;
+use App\Traits\WithSid;
 
 class EmployeeFactory extends Factory
 {
+
+    use WithSid;
 
     /**
      * The name of the factory's corresponding model.
@@ -15,6 +18,15 @@ class EmployeeFactory extends Factory
      */
     protected $model = Employee::class;
 
+
+    public function sid()
+    {
+        $this->sidkey = 'employee';
+        $s = $this->generateSid();
+        $this->setSid($s);
+
+        return $s;
+    }
 
     /**
      * Define the model's default state.
@@ -25,7 +37,7 @@ class EmployeeFactory extends Factory
     {
         return [
             'fullname' => $this->faker->name(),
-            'employee_sid' => $this->faker->numberBetween(0, 999999),
+            'employee_sid' => $this->sid(),
             'national_id' => '12345678901234567890',
             'birthday' => $this->faker->date(),
             'origin_city' => $this->faker->city(),

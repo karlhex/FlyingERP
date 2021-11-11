@@ -64,4 +64,28 @@ export default {
       'cer_date': '获取日期',
       'source': '颁发机构',
   },
+  project: {
+    title: '项目',
+    sid: '项目编号',
+    name: '项目名称',
+    status: '项目状态',
+    start_date: '项目开始日期',
+    end_date: '项目结束日期'
+  },
+  role: {
+    title: '项目角色分配',
+    role: '项目角色',
+    employee: '人员',
+  },
+  plan: {
+    title: '项目计划',
+    start_date: '开始日期',
+    end_date: '结束日期',
+    act_start_date: '实际开始日期',
+    act_end_date: '实际结束日期',
+    instruction: '计划操作',
+    status: '执行状态',
+    charge_employee: '负责人',
+    action_employee: '执行人',
+  }
 }

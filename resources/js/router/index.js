@@ -66,7 +66,7 @@ const routes = [
         name: 'productinfos',
     },
     {
-        path: '/productinfos/:id',
+        path: '/productinfo/:id',
         component: () => import('../views/productinfos/edit'),
         name: 'productinfo.edit',
     }

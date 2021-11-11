@@ -67,7 +67,6 @@ export default {
     }
 
     const page_count = computed( () => {
-      console.log('total', total)
       return Math.floor(((total.value - 1) / 5) + 1)
     })
 
