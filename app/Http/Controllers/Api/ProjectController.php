@@ -9,6 +9,7 @@ use App\Http\Resources\ProjectResource;
 use App\Traits\WithReplaceList;
 use App\Traits\WithSearch;
 use App\Traits\WithSid;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -52,6 +53,8 @@ class ProjectController extends Controller
         $this->replaceList($project, 'roles', $roles);
         $plans = $request->input('plans');
         $this->replaceList($project, 'plans', $plans);
+        $files = $request->input('files');
+        $this->replaceList($project, 'files', $files);
 
         $this->setSid($project->sid);
 
@@ -84,6 +87,10 @@ class ProjectController extends Controller
         $this->replaceList($project, 'roles', $roles);
         $plans = $request->input('plans');
         $this->replaceList($project, 'plans', $plans);
+        $files = $request->input('files');
+        Log::debug('files'.json_encode($files));
+
+        $this->replaceList($project, 'files', $files);
 
         $this->setSid($project->sid);
 

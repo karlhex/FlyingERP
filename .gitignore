@@ -17,3 +17,5 @@ yarn-error.log
 /.idea
 /.vscode
 .DS_Store
+public/js/resources_js*
+public/js/resources_js*

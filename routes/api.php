@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/allsos', [SOController::class, 'all']);
+Route::post('/upload', [\App\Http\Controllers\Api\FileController::class, 'upload']);
 Route::get('/user/search', [\App\Http\Controllers\Api\UserController::class, 'search']);
 Route::get('/company/search', [\App\Http\Controllers\Api\CompanyController::class, 'search']);
 Route::get('/person/search', [\App\Http\Controllers\Api\PersonController::class, 'search']);

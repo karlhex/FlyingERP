@@ -36,7 +36,7 @@ class ContractRequest extends FormRequest
             'amount' => ['required', 'numeric'],
             'sign_date' => ['required', 'date'],
             'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after:start_date'],
             'contact_person' => ['required', 'numeric'],
         ];
     }

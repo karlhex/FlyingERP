@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\PlanResource;
+use App\Http\Resources\FileResource;
 
 class ProjectResource extends JsonResource
 {
@@ -24,6 +25,7 @@ class ProjectResource extends JsonResource
           'status' => $this->status,
           'plans' => PlanResource::collection($this->plans()->orderBy('sequence')->get()),
           'roles' => ProjectRoleResource::collection($this->roles()->orderBy('sequence')->get()),
+          'files' => FileResource::collection($this->files()->orderBy('sequence')->get()),
         ];
     }
 }

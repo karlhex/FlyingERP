@@ -30,6 +30,7 @@
           <el-form-item :label="t('project.end_date')" :label-width="formLabelWidth">
             <el-date-picker v-model="form.end_date" type="date" placeholder="Pick a day"></el-date-picker>
           </el-form-item>
+
         </template>
       </edit-box>
 
@@ -68,6 +69,7 @@
             </template>
           </el-table-column>
         </template>
+
 
         <template v-slot:dialog >
           <el-form :model="plform">
@@ -150,6 +152,9 @@
           </el-form>
         </template>
       </list-box>
+
+      <file-box v-model="form.files" />
+
     </template>
   </edit-dialog>
   </div>
@@ -168,10 +173,12 @@ import SidInput from '../../components/form/sidInput.vue'
 import ListBox from '../../components/listbox/index.vue'
 import EditBox from '../../components/editbox/index.vue'
 
+import FileBox from '../../components/filebox/index.vue'
+
 import { useI18n }  from 'vue-i18n'
 
   export default {
-    components: { EditDialog, SoSelect, EditBox, ListBox, DateFormat, SoFormat, SidInput, IdSelect },
+    components: { EditDialog, SoSelect, EditBox, ListBox, DateFormat, SoFormat, SidInput, IdSelect, FileBox },
 	setup() {
     const state = reactive({
       zform: {
@@ -185,6 +192,7 @@ import { useI18n }  from 'vue-i18n'
 
         roles: [],
         plans: [],
+        files: [],
       },
       form: {},
       formLabelWidth: 120,
