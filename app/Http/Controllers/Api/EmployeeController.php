@@ -9,6 +9,7 @@ use App\Http\Resources\EmployeeResource;
 use App\Traits\WithReplaceList;
 use App\Traits\WithSearch;
 use App\Traits\WithSid;
+use Illuminate\Support\Facades\Log;
 
 class EmployeeController extends Controller
 {
@@ -101,7 +102,13 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
+        $employee->certificates()->delete();
+        $employee->work_experiences()->delete();
+        $employee->project_experiences()->delete();
+        $employee->educations()->delete();
         $employee->delete();
+
+        Log::debug('destroyed');
 
         return response()->noContent();
     }

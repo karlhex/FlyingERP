@@ -51,6 +51,7 @@ export default {
         return
       }
       await destroyRecord(id)
+      await getRecords(state.page)
     }
 
     const handleEdit = async (id) => {
